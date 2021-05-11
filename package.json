@@ -1,0 +1,23 @@
+{
+  "name": "pdf-sdk",
+  "version": "0.0.7",
+  "description": "Verifiable QR SDK for PathCheck's URI DataModels",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "webpack": "webpack --config webpack.config.js"
+  },
+  "author": "Vitor Pamplona",
+  "license": "MIT",
+  "dependencies": {
+    "crypto-js": "^4.0.0",
+    "elliptic": "^6.5.4",
+    "hi-base32": "^0.5.0",
+    "sha256": "^0.2.0"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^4.6.0"
+  }
+}
