@@ -1,6 +1,6 @@
 # Verifiable QR SDK for PathCheck's URI DataModels
 
-JavaScript Implementation of [PaperCreds](https://github.com/Path-Check/paper-cred)
+JavaScript Implementation of [PaperCreds](https://github.com/Path-Check/paper-cred), a URI-based Verifiable QR Credentials. 
 
 # Install
 ```
