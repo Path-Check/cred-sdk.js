@@ -64,15 +64,16 @@ dig -t txt keys.pathcheck.org
 With the keys: 
 
 ```
-const PRIVATE_KEY = 
-  "-----BEGIN EC PARAMETERS-----\n" +
-  "BgUrgQQACg==\n" +
-  "-----END EC PARAMETERS-----\n" +
-  "-----BEGIN EC PRIVATE KEY-----\n" +
-  "MHQCAQEEIPWKbSezZMY1gCpvN42yaVv76Lo47FvSsVZpQl0a5lWRoAcGBSuBBAAK\n" +
-  "oUQDQgAE6DeIun4EgMBLUmbtjQw7DilMJ82YIvOR2jz/IK0R/F7/zXY1z+gqvFXf\n" +
-  "DcJqR5clbAYlO9lHmvb4lsPLZHjugQ==\n" +
-  "-----END EC PRIVATE KEY-----";
+const PRIVATE_KEY = `
+-----BEGIN EC PARAMETERS-----
+BgUrgQQACg==
+-----END EC PARAMETERS-----
+-----BEGIN EC PRIVATE KEY-----
+MHQCAQEEIPWKbSezZMY1gCpvN42yaVv76Lo47FvSsVZpQl0a5lWRoAcGBSuBBAAK
+oUQDQgAE6DeIun4EgMBLUmbtjQw7DilMJ82YIvOR2jz/IK0R/F7/zXY1z+gqvFXf
+DcJqR5clbAYlO9lHmvb4lsPLZHjugQ==
+-----END EC PRIVATE KEY-----
+`;
 
 const PUB_KEY_ID = "KEYS.PATHCHECK.ORG"
 ```
@@ -80,13 +81,13 @@ const PUB_KEY_ID = "KEYS.PATHCHECK.ORG"
 And a Payload 
 
 ```
-const TEST_BADGE_PAYLOAD = ["20210511", "MODERNA", "COVID19", "012L20A", "28", "", "C28161", "RA", "500", "JANE DOE", "19820321"];
+const BADGE_PAYLOAD = ["20210511", "MODERNA", "COVID19", "012L20A", "28", "", "C28161", "RA", "500", "JANE DOE", "19820321"];
 ```
 
 Call the signAndPack to create the URI for the QR Code: 
 
 ```
-const qrUri = await signAndPack("BADGE", "2", PRIVATE_KEY, PUB_KEY_ID, TEST_BADGE_PAYLOAD);
+const qrUri = await signAndPack("BADGE", "2", PRIVATE_KEY, PUB_KEY_ID, BADGE_PAYLOAD);
 ````
 
 And call the unpack and verify to convert the URI into the payload: 
