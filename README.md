@@ -92,5 +92,5 @@ const qrUri = await signAndPack("BADGE", "2", PRIVATE_KEY, PUB_KEY_ID, TEST_BADG
 And call the unpack and verify to convert the URI into the payload: 
 
 ```
-const result = await unpackAndVerify(qrUri);
+const payloadArray = await unpackAndVerify(qrUri);
 ```
