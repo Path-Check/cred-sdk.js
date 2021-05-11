@@ -3,7 +3,7 @@
 JavaScript Implementation of [PaperCreds](https://github.com/Path-Check/paper-cred), a URI-based Verifiable QR Credentials. 
 
 # Install
-```
+```sh
 npm install pcf.sdk --save
 ```
 
@@ -12,7 +12,7 @@ npm install pcf.sdk --save
 ## Create a Private/Public Elliptic Curve Key Pair
 
 Private Key: 
-```
+```sh
 openssl ecparam -name secp256k1 -genkey -out private.pem
 ```
 
@@ -30,7 +30,7 @@ DcJqR5clbAYlO9lHmvb4lsPLZHjugQ==
 ```
 
 Public Key:
-```
+```sh
 openssl ec -in private.key -pubout -out public.pem
 ```
 
@@ -55,13 +55,13 @@ Insert a new DNS TXT Record with the base64 Segment.
 
 You can test the DNS Lookup with: 
 
-```
+```sh
 dig -t txt <YOUR DOMAIN>
 ```
 
 Example: 
 
-```
+```sh
 dig -t txt keys.pathcheck.org
 ```
 
@@ -69,7 +69,7 @@ dig -t txt keys.pathcheck.org
 
 With the keys: 
 
-```
+```js
 const PRIVATE_KEY = `
 -----BEGIN EC PARAMETERS-----
 BgUrgQQACg==
@@ -86,30 +86,30 @@ const PUB_KEY_ID = "KEYS.PATHCHECK.ORG"
 
 And a Payload 
 
-```
+```js
 const BADGE_PAYLOAD = ["20210511", "MODERNA", "COVID19", "012L20A", "28", "", "C28161", "RA", "500", "JANE DOE", "19820321"];
 ```
 
 Call the signAndPack to create the URI for the QR Code: 
 
-```
+```js
 const qrUri = await signAndPack("BADGE", "2", PRIVATE_KEY, PUB_KEY_ID, BADGE_PAYLOAD);
 ```
 
 And call the unpack and verify to convert the URI into the payload: 
 
-```
+```js
 const payloadArray = await unpackAndVerify(qrUri);
 ```
 
 # Development
 
-```
+```sh
 npm install
 ``` 
 
 # Test
 
-```
+```sh
 npm test
 ```
