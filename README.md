@@ -1,5 +1,11 @@
-# pcf.sdk.js
-Verifiable QR SDK for PathCheck's URI DataModels
+# Verifiable QR SDK for PathCheck's URI DataModels
+
+JavaScript Implementation of [PaperCreds](https://github.com/Path-Check/paper-cred)
+
+# Install
+```
+npm install pcf.sdk --save
+```
 
 # Setting up the Keys and Key ID Resolver via DNS
 
@@ -59,7 +65,7 @@ Example:
 dig -t txt keys.pathcheck.org
 ```
 
-# How to use it
+# Usage
 
 With the keys: 
 
@@ -88,10 +94,22 @@ Call the signAndPack to create the URI for the QR Code:
 
 ```
 const qrUri = await signAndPack("BADGE", "2", PRIVATE_KEY, PUB_KEY_ID, BADGE_PAYLOAD);
-````
+```
 
 And call the unpack and verify to convert the URI into the payload: 
 
 ```
 const payloadArray = await unpackAndVerify(qrUri);
+```
+
+# Development
+
+```
+npm install
+``` 
+
+# Test
+
+```
+npm test
 ```
