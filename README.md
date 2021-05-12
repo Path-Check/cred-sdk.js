@@ -31,7 +31,7 @@ DcJqR5clbAYlO9lHmvb4lsPLZHjugQ==
 
 Public Key:
 ```sh
-openssl ec -in private.key -pubout -out public.pem
+openssl ec -in private.pem -pubout -out public.pem
 ```
 
 Resulting in: 
