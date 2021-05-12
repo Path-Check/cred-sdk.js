@@ -1,6 +1,6 @@
 {
   "name": "pdf-sdk",
-  "version": "0.0.7",
+  "version": "0.0.1",
   "description": "Verifiable QR SDK for PathCheck's URI DataModels",
   "main": "lib/index.js",
   "scripts": {
