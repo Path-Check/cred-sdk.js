@@ -65,12 +65,10 @@ test('Sign Pack And Unpack Verify JSON', async () => {
   expect(result).toStrictEqual(TEST_PAYLOAD);
 });
 
-
 test('HashPayload', async () => {
   const hash = await hashPayload(TEST_PAYLOAD);
   expect(hash).toBe("MIYTGMTCMVRTIYTGMI2DEOJQGNSDAMBZGI2GGZDGGEYTMZRTGY3GIMJXMMZTEYZZME4TQYJRMEYDSYJWHFQTKNBVGVRTQNZVHEYTCMA");
 });
-
 
 test('Map Headers', async () => {
   const mapOfHeadersAndFields = await mapHeaders(TEST_PAYLOAD, "BADGE", "2");
