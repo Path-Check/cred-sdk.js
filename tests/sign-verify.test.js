@@ -1,6 +1,7 @@
 const {sign, verify, pack, unpack, signAndPack, unpackAndVerify, resolveKey, hashPayload, mapHeaders} = require('../lib/index');
 
-const TEST_PAYLOAD = ["20210511", "MODERNA", "COVID19", "012L20A", "28", "", "C28161", "RA", "500", "JANE DOE", "19820321"];
+                      /*  date  /   manuf  /  product /    lot   /boosts/passkey/  route  / site/ dose /   name      /   dob  */
+const TEST_PAYLOAD = ["20210511", "MODERNA", "COVID19", "012L20A", "28", ""     , "C28161", "RA", "500", "JANE DOE", "19820321"];
 
 const PRIVATE_KEY = `-----BEGIN EC PARAMETERS-----
 BgUrgQQACg==
@@ -72,18 +73,15 @@ test('HashPayload', async () => {
 
 test('Map Headers', async () => {
   const mapOfHeadersAndFields = await mapHeaders(TEST_PAYLOAD, "BADGE", "2");
-  expect(mapOfHeadersAndFields).toStrictEqual({"boosts": "28", "date": "20210511", "dob": "19820321", "dose": "500", "lot": "012L20A", "manuf": "MODERNA", "name": "JANE DOE", "passkey": "", "product": "COVID19", "route": "C28161", "site": "RA"})
+  expect(mapOfHeadersAndFields).toStrictEqual({"boosts": "28", "date": "20210511", "dob": "19820321", "dose": "500", "lot": "012L20A", "manuf": "MODERNA", "name": "JANE DOE", "product": "COVID19", "route": "C28161", "site": "RA"})
 });
 
 test('Map Headers Non Existent', async () => {
   const incorrectMapOfHeadersAndFields = await mapHeaders([10], "CERTA", "1");
-  expect(incorrectMapOfHeadersAndFields).toStrictEqual({"undefined": 10})
+  expect(incorrectMapOfHeadersAndFields).toStrictEqual({"Undefined 00": 10})
 });
 
-test('URI with Arrays', async () => {
-  const signed = "CRED:DGC:1:GBCQEID7GHBU7NITV4BDKEU6SWE3N4HHTYFMKZ56IQUFPQXPKBGJXDRR2QBCCAFZ2DUACWJEEI6VI4A3RHCQSBMJSRZXZE2PSTH2EO5ZGXNXXOGHGI:1A9.PCF.PW:D'ARS%C3%98NS%20-%20VAN%20HALEN/FRAN%C3%87OIS-JOAN/DARSONS%3CVAN%3CHALEN/FRANCOIS%3CJOAN/20090227/2/840539006/1119349007/EU%2F1%2F20%2F1528/ORG-100030215/1/2/20210504/NL/MINISTRY%20OF%20VWS/01%3ANL%3APLA8UWS60Z4RZXVALL6GAZ/840539006/1119349007/EU%2F1%2F20%2F1528/ORG-100030215/2/2/20210524/NL/MINISTRY%20OF%20VWS/01%3ANL%3AATS342XDYS358FDFH3GTK5/2/840539006/LP217198-3/COVID%20PCR/1232/1613226000/1613227201/260415000/GGD%20FRYSL%C3%82N%2C%20L-HELICONWEG/NL/MINISTRY%20OF%20VWS/01%3ANL%3AGGD%2F81AAH16AZ/840539006/LP6464-4/NAAT%20TEST/1343/1618323600/1618324801/260373001/GGD%20FRYSL%C3%82N%2C%20L-HELICONWEG/NL/MINISTRY%20OF%20VWS/01%3ANL%3AGGD%2F23BBS36BC/0";
-  const result = await unpackAndVerify(signed);
-  expect(result).toStrictEqual([
+const DGC_PAYLOAD_WITH_ARRAY = [
     "D'ARSØNS - VAN HALEN",
     "FRANÇOIS-JOAN",
     "DARSONS<VAN<HALEN",
@@ -134,5 +132,76 @@ test('URI with Arrays', async () => {
     "MINISTRY OF VWS",
     "01:NL:GGD/23BBS36BC",
     "0",
-  ]);
+  ];
+
+  const DGC_PAYLOAD_AS_OBJECT = {
+  "dob": "20090227",
+  "nam.fn": "D'ARSØNS - VAN HALEN",
+  "nam.fnt": "DARSONS<VAN<HALEN",
+  "nam.gn": "FRANÇOIS-JOAN",
+  "nam.gnt": "FRANCOIS<JOAN",
+  "recov": [],
+  "test": [ {
+    "t.ci": "01:NL:GGD/81AAH16AZ",
+    "t.co": "NL",
+    "t.dr": "1613227201",
+    "t.is": "MINISTRY OF VWS",
+    "t.ma": "1232",
+    "t.nm": "COVID PCR",
+    "t.sc": "1613226000",
+    "t.tc": "GGD FRYSLÂN, L-HELICONWEG",
+    "t.tg": "840539006",
+    "t.tr": "260415000",
+    "t.tt": "LP217198-3",
+    },{
+      "t.ci": "01:NL:GGD/23BBS36BC",
+      "t.co": "NL",
+      "t.dr": "1618324801",
+      "t.is": "MINISTRY OF VWS",
+      "t.ma": "1343",
+      "t.nm": "NAAT TEST",
+      "t.sc": "1618323600",
+      "t.tc": "GGD FRYSLÂN, L-HELICONWEG",
+      "t.tg": "840539006",
+      "t.tr": "260373001",
+      "t.tt": "LP6464-4",
+    },
+  ],
+  "vax": [ {
+      "v.ci": "01:NL:PLA8UWS60Z4RZXVALL6GAZ",
+      "v.co": "NL",
+      "v.dn": "1",
+      "v.dt": "20210504",
+      "v.is": "MINISTRY OF VWS",
+      "v.ma": "ORG-100030215",
+      "v.mp": "EU/1/20/1528",
+      "v.sd": "2",
+      "v.tg": "840539006",
+      "v.vp": "1119349007",
+    }, {
+      "v.ci": "01:NL:ATS342XDYS358FDFH3GTK5",
+      "v.co": "NL",
+      "v.dn": "2",
+      "v.dt": "20210524",
+      "v.is": "MINISTRY OF VWS",
+      "v.ma": "ORG-100030215",
+      "v.mp": "EU/1/20/1528",
+      "v.sd": "2",
+      "v.tg": "840539006",
+      "v.vp": "1119349007",
+    },
+  ],
+}
+
+
+test('URI with Arrays', async () => {
+  const signed = "CRED:DGC:1:GBCQEID7GHBU7NITV4BDKEU6SWE3N4HHTYFMKZ56IQUFPQXPKBGJXDRR2QBCCAFZ2DUACWJEEI6VI4A3RHCQSBMJSRZXZE2PSTH2EO5ZGXNXXOGHGI:1A9.PCF.PW:D'ARS%C3%98NS%20-%20VAN%20HALEN/FRAN%C3%87OIS-JOAN/DARSONS%3CVAN%3CHALEN/FRANCOIS%3CJOAN/20090227/2/840539006/1119349007/EU%2F1%2F20%2F1528/ORG-100030215/1/2/20210504/NL/MINISTRY%20OF%20VWS/01%3ANL%3APLA8UWS60Z4RZXVALL6GAZ/840539006/1119349007/EU%2F1%2F20%2F1528/ORG-100030215/2/2/20210524/NL/MINISTRY%20OF%20VWS/01%3ANL%3AATS342XDYS358FDFH3GTK5/2/840539006/LP217198-3/COVID%20PCR/1232/1613226000/1613227201/260415000/GGD%20FRYSL%C3%82N%2C%20L-HELICONWEG/NL/MINISTRY%20OF%20VWS/01%3ANL%3AGGD%2F81AAH16AZ/840539006/LP6464-4/NAAT%20TEST/1343/1618323600/1618324801/260373001/GGD%20FRYSL%C3%82N%2C%20L-HELICONWEG/NL/MINISTRY%20OF%20VWS/01%3ANL%3AGGD%2F23BBS36BC/0";
+  const result = await unpackAndVerify(signed);
+  expect(result).toStrictEqual(DGC_PAYLOAD_WITH_ARRAY);
+}); 
+
+test('Map Headers with Arrays', async () => {
+  const incorrectMapOfHeadersAndFields = await mapHeaders(DGC_PAYLOAD_WITH_ARRAY, "DGC", "1");
+  expect(incorrectMapOfHeadersAndFields).toStrictEqual(DGC_PAYLOAD_AS_OBJECT)
 });
+

@@ -29,9 +29,3 @@ test('Resolve URL', async () => {
   expect(downloadedPubKey.debugPath).toStrictEqual("https://github.pathcheck.org/keys/ecdsa_pub_key")
   expect(downloadedPubKey.type).toStrictEqual("URL")
 });
-
-
-test('Headers Badge', async () => {
-  const mapOfHeadersAndFields = await getPayloadHeader("BADGE", "2");
-  expect(mapOfHeadersAndFields).toStrictEqual(["date", "manuf", "product", "lot", "boosts", "passkey", "route", "site", "dose", "name", "dob"])
-});
