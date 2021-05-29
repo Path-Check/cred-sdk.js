@@ -1,5 +1,5 @@
 {
-  "name": "pdf-sdk",
+  "name": "@pathcheck/pcf-sdk",
   "version": "0.0.3",
   "description": "Verifiable QR SDK for PathCheck's URI DataModels",
   "main": "lib/index.js",
