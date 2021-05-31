@@ -1,5 +1,4 @@
 const path = require('path');
-var Visualizer = require('webpack-visualizer-plugin');
 
 module.exports = {
   mode: "production",
@@ -14,6 +13,5 @@ module.exports = {
   target: 'web',
   optimization: {
     minimize: true
-  },
-  plugins: [new Visualizer()]
+  }
 };
