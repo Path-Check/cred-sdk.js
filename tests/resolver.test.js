@@ -1,4 +1,4 @@
-const {getKeyId, getPayloadHeader} = require('../lib/resolver');
+const {getKeyId, getPayloadHeader} = require('../lib/index');
 
 const PUB_KEY = `-----BEGIN PUBLIC KEY-----
 MFYwEAYHKoZIzj0CAQYFK4EEAAoDQgAE6DeIun4EgMBLUmbtjQw7DilMJ82YIvOR
@@ -29,3 +29,9 @@ test('Resolve URL', async () => {
   expect(downloadedPubKey.debugPath).toStrictEqual("https://github.pathcheck.org/keys/ecdsa_pub_key")
   expect(downloadedPubKey.type).toStrictEqual("URL")
 });
+
+test('Resolve Payload', async () => {
+  const downloadedPubKey = await getPayloadHeader("BADGE", 2  );
+  expect(downloadedPubKey).toStrictEqual("date/manuf/product/lot/boosts/passkey/route/site/dose/name/dob")
+});
+

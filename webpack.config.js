@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: "production",
-  entry: "./lib/index.js",
+  entry: "./lib/main.js",
   devtool: "source-map",
   output: {
     filename: 'pcf.sdk.min.js',
