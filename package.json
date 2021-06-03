@@ -8,6 +8,13 @@
     "test": "mocha",
     "webpack": "webpack --config webpack.config.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Path-Check/cred-sdk.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Path-Check/cred-sdk.js/issues"
+  },
   "author": "Vitor Pamplona",
   "license": "GPL-3.0-only",
   "dependencies": {
