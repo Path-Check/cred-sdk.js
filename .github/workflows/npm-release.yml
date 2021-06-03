@@ -38,8 +38,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/pcf.sdk.min.js
-          asset_name: pcf.sdk.min.js
+          asset_path: ./dist/cred.sdk.min.js
+          asset_name: cred.sdk.min.js
           asset_content_type: application/zip
 
 

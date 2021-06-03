@@ -5,9 +5,9 @@ module.exports = {
   entry: "./lib/main.js",
   devtool: "source-map",
   output: {
-    filename: 'pcf.sdk.min.js',
+    filename: 'cred-sdk.min.js',
     path: path.resolve(__dirname, 'dist'),
-    library: 'PCF',
+    library: 'CRED',
     libraryTarget: 'umd',
   },
   target: 'web',

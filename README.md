@@ -4,7 +4,7 @@ JavaScript Implementation of [PaperCreds](https://github.com/Path-Check/paper-cr
 
 # Install
 ```sh
-npm install pcf.sdk --save
+npm install @pathcheck/cred-sdk --save
 ```
 
 # Setting up the Keys and Key ID Resolver via DNS
