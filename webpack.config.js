@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -13,5 +14,10 @@ module.exports = {
   target: 'web',
   optimization: {
     minimize: true
-  }
+  }, 
+  plugins: [
+      new webpack.ProvidePlugin({
+          Buffer: ['buffer', 'Buffer'],
+      }),
+  ]
 };
