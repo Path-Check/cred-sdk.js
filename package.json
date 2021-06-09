@@ -1,6 +1,6 @@
 {
   "name": "@pathcheck/cred-sdk",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Verifiable QR SDK for PathCheck's URI DataModels",
   "main": "lib/index.js",
   "module": "lib/main.js",
