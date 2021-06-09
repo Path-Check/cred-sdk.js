@@ -4,6 +4,7 @@
   "description": "Verifiable QR SDK for PathCheck's URI DataModels",
   "main": "lib/index.js",
   "module": "lib/main.js",
+  "react-native": "lib/main.js",
   "scripts": {
     "test": "mocha",
     "webpack": "webpack --config webpack.config.js"
