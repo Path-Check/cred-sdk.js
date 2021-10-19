@@ -1,4 +1,4 @@
-const {sign, verify, pack, unpack, signAndPack, unpackAndVerify, resolveKey, hashPayload, mapHeaders} = require('../lib/index');
+const {sign, verify, pack, unpack, signAndPack, unpackAndVerify, resolveKey, hashPayload, hashEndPoint, mapHeaders} = require('../lib/index');
 const expect = require('chai').expect; 
 
                       /*  date  /   manuf  /  product /    lot   /boosts/passkey/  route  / site/ dose /   name      /   dob  */
@@ -72,6 +72,14 @@ describe('Crypto', function() {
   it('should hash a payload', async () => {
     const hash = await hashPayload(TEST_PAYLOAD);
     expect(hash).to.eql("WEZL5RF7WQUQHUAJETG7CFXTM3IXYMWJVGFBUCNGTJKFLSDVSEIA");
+  });
+
+  it('should hash an endpoint', async () => {
+    const hash = await hashEndPoint('https://pp.netclipart.com/pp/s/244-2441803_profile-pic-icon-png.png');
+    expect(hash).to.eql("6Z4DYDVPCCPEUWPZJ7NZPT4TJUFCWX2J3ROT26TD2WTCX4P6DFBQ");
+    const hash2 = await hashEndPoint('https://github.pathcheck.org/img/janedoe.jpeg');
+    expect(hash2).to.eql("7O7P2XDPQHAX7ARVZYHURTAKDLFSQYPNJQ5OWHPMLJDGV7C3GTEA");
+    expect(hash2).to.not.eql(hash);
   });
 
   it('should map headers', async () => {
